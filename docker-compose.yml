@@ -7,7 +7,9 @@ services:
     volumes:
       - db_volume:/var/lib/postgresql/data
     environment:
+      POSTGRES_USER: ${DATABASE_USERNAME}
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
     security_opt:
       - no-new-privileges:true
 

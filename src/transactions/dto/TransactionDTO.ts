@@ -1,10 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString } from 'class-validator';
+import { IsOptional, IsString, IsUUID } from 'class-validator';
 
 export class TransactionDTO {
   @ApiProperty()
   @IsString()
-  id: string;
+  @IsUUID()
+  @IsOptional()
+  id?: string;
 
   @ApiProperty()
   @IsString()

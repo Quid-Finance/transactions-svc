@@ -3,13 +3,13 @@ import { bigint, pgTable, uuid } from 'drizzle-orm/pg-core';
 export const TRANSACTIONS_SCHEMA_TOKEN = 'TRANSACTIONS_SCHEMA';
 
 export const transactions = pgTable('transactions', {
-  id: uuid().primaryKey(),
+  id: uuid().primaryKey().defaultRandom(),
   amount: bigint({ mode: 'bigint' }).notNull(),
 });
 
 export type TransactionSchema = typeof transactions;
 
-// export type TransactionEntity = typeof transactions.$inferSelect;
+export type TransactionEntity = typeof transactions.$inferSelect;
 // export type NewTransactionEntity = typeof transactions.$inferInsert;
 
 // Here's a basic outline of the schema:

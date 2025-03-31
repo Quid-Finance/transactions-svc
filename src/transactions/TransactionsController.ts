@@ -1,4 +1,11 @@
-import { Controller, Get, Inject } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Inject,
+  Post,
+  ValidationPipe,
+} from '@nestjs/common';
 import {
   ITransactionsService,
   TRANSACTIONS_SERVICE_TOKEN,
@@ -19,8 +26,18 @@ export class TransactionsController {
   ) { }
 
   @Get()
-  async getTransactions(): Promise<TransactionDTO[]> {
-    const transactions = await this.transactionsService.getTransactions();
+  async getAll(): Promise<TransactionDTO[]> {
+    const transactions = await this.transactionsService.getAll();
     return transactions.map(this.transactionsMapper.toDTO);
+  }
+
+  @Post()
+  async create(
+    @Body(new ValidationPipe()) transactionDTO: TransactionDTO,
+  ): Promise<TransactionDTO> {
+    const transaction = await this.transactionsService.create(
+      this.transactionsMapper.fromDTOToDomain(transactionDTO),
+    );
+    return this.transactionsMapper.toDTO(transaction);
   }
 }

@@ -1,10 +1,11 @@
-import { bigint, pgTable, uuid } from 'drizzle-orm/pg-core';
+import { bigint, pgTable, uuid, timestamp } from 'drizzle-orm/pg-core';
 
 export const TRANSACTIONS_SCHEMA_TOKEN = 'TRANSACTIONS_SCHEMA';
 
 export const transactions = pgTable('transactions', {
   id: uuid().primaryKey().defaultRandom(),
   amount: bigint({ mode: 'bigint' }).notNull(),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
 });
 
 export type TransactionSchema = typeof transactions;

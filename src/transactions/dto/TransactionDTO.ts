@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsOptional, IsString, IsUUID } from 'class-validator';
+import { IsNumberString, IsOptional, IsString, IsUUID } from 'class-validator';
 
 export class TransactionDTO {
   @ApiProperty()
@@ -9,6 +9,6 @@ export class TransactionDTO {
   id?: string;
 
   @ApiProperty()
-  @IsString()
+  @IsNumberString({}, { message: 'amount must be a numeric string' })
   amount: string;
 }

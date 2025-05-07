@@ -21,9 +21,7 @@
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "db:migrate": "drizzle-kit migrate",
     "db:generate": "drizzle-kit generate",
-    "env:setup": "sh scripts/setup-env.sh",
-    "gen:db": "sequelize-cli db:create --config ./sequelize/config.js",
-    "gen:migration": "sequelize-cli migration:generate --name"
+    "env:setup": "sh scripts/setup-env.sh"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.10",

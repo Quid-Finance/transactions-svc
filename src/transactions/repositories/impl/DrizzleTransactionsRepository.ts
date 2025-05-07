@@ -21,9 +21,13 @@ export class DrizzleTransactionsRepository implements ITransactionsRepository {
     private readonly transactions: TransactionSchema,
     @Inject(TRANSACTIONS_MAPPER_TOKEN)
     private readonly transactionsMapper: ITransactionsMapper,
-  ) { }
+  ) {}
+
   async getAll(): Promise<Transaction[]> {
-    return this.db.select().from(this.transactions);
+    const transactions = await this.db.select().from(this.transactions);
+    return transactions.map((transaction) =>
+      this.transactionsMapper.fromEntityToDomain(transaction),
+    );
   }
 
   async create(transaction: Transaction): Promise<Transaction> {

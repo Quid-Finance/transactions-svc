@@ -23,12 +23,14 @@ export class TransactionsController {
     private readonly transactionsService: ITransactionsService,
     @Inject(TRANSACTIONS_MAPPER_TOKEN)
     private readonly transactionsMapper: ITransactionsMapper,
-  ) { }
+  ) {}
 
   @Get()
   async getAll(): Promise<TransactionDTO[]> {
     const transactions = await this.transactionsService.getAll();
-    return transactions.map(this.transactionsMapper.toDTO);
+    return transactions.map((transaction) =>
+      this.transactionsMapper.toDTO(transaction),
+    );
   }
 
   @Post()

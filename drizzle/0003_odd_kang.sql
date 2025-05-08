@@ -1,0 +1,1 @@
+ALTER TABLE "transactions" RENAME COLUMN "createdAt" TO "created_at";
